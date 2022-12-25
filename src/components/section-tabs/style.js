@@ -1,8 +1,11 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-12-25 02:56:38
+ * @LastEditTime: 2022-12-25 16:29:57
+ */
 import styled from "styled-components";
 
 export const TabsWrapper = styled.div`
-  display: flex;
-
   .item {
     box-sizing: border-box;
     flex-basis: 120px;

@@ -1,9 +1,9 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-12-24 13:18:40
- * @LastEditTime: 2022-12-25 03:53:20
+ * @LastEditTime: 2022-12-25 18:08:29
  */
-import { getHomeDiscountData, getHomeGoodPriceData, getHomeHighScoreData, getHomeHotRecommendData } from '@/services'
+import { getHomeDiscountData, getHomeGoodPriceData, getHomeHighScoreData, getHomeHotRecommendData, getHomeLongforData, getHomePlusData } from '@/services'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const fetchHomeDataAction = createAsyncThunk("fetchdata", (payload, { dispatch }) => {
@@ -19,6 +19,12 @@ export const fetchHomeDataAction = createAsyncThunk("fetchdata", (payload, { dis
   getHomeHotRecommendData().then(res => {
     dispatch(changeRecommandInfoAction(res))
   })
+  getHomeLongforData().then(res => {
+    dispatch(changeLongforInfoAction(res))
+  })
+  getHomePlusData().then(res => {
+    dispatch(changePlusInfoAction(res))
+  })
 })
 
 const homeSlice = createSlice({
@@ -27,7 +33,9 @@ const homeSlice = createSlice({
     goodPriceInfo: {},
     highScoreInfo: {},
     discountInfo: {},
-    recommendInfo: {}
+    recommendInfo: {},
+    longforInfo: {},
+    plusInfo: {}
   },
   reducers: {
     changeGoodPriceInfoAction(state, { payload }) {
@@ -41,6 +49,12 @@ const homeSlice = createSlice({
     },
     changeRecommandInfoAction(state, { payload }) {
       state.recommendInfo = payload
+    },
+    changeLongforInfoAction(state, { payload }) {
+      state.longforInfo = payload
+    },
+    changePlusInfoAction(state, { payload }) {
+      state.plusInfo = payload
     }
   },
   // extraReducers: { //* 这里的作用就是将发送网络拿到的东西放到redux中
@@ -55,7 +69,9 @@ export const {
   changeGoodPriceInfoAction,
   changeHighScoreInfoAction,
   changeDiscountInfoAction,
-  changeRecommandInfoAction  
+  changeRecommandInfoAction  ,
+  changeLongforInfoAction,
+  changePlusInfoAction
 } = homeSlice.actions
 
 export default homeSlice.reducer
